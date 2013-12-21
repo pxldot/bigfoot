@@ -714,6 +714,7 @@ $popover-scroll-up-transition-delay:            0.4s; // Sets the delay for the 
     border-radius: $popover-content-border-radius;
 
     // INTERIOR ELEMENTS
+	-webkit-font-smoothing: subpixel-antialiased;
     img { max-width: 100%; }
     *:last-child { margin-bottom: 0; }
     *:first-child { margin-top: 0; }

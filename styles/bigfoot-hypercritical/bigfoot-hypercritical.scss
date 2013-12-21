@@ -721,6 +721,7 @@ $popover-scroll-up-transition-delay:            0.4s; // Sets the delay for the 
 
     // INTERIOR ELEMENTS
     font-family: Avenir, 'Segoe UI', 'Lucida Grande', Lucida, Verdana, sans-serif;
+	-webkit-font-smoothing: subpixel-antialiased;
 
     h1, h2, h3, h4, h5, h6 {
         font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;

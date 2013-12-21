@@ -724,6 +724,7 @@ $popover-scroll-up-transition-delay:            0.4s; // Sets the delay for the 
 
     // INTERIOR ELEMENTS
     font-family: Verdana, sans-serif;
+	-webkit-font-smoothing: subpixel-antialiased;
 
     img { max-width: 100%; }
     a {
