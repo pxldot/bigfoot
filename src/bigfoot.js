@@ -585,10 +585,8 @@
                 } finally {
 
                     // Create content and activate user-defined callback on it
-                    $content = $(content);
+                    $content = $(content).insertAfter($buttons);
                     try { settings.activateCallback($content); } catch(err) {}
-
-                    $content.insertAfter($buttons);
 
                     // Default state is init to allow the initial positioning to set transform-origin
                     popoverStates[$this.attr("data-footnote-identifier")] = "init";
