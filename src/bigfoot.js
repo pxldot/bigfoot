@@ -92,7 +92,12 @@
                                                 "<span class=\"footnote-circle\" data-footnote-number=\"{{FOOTNOTENUM}}\"></span>" +
                                                 "<span class=\"footnote-circle\"></span>" +
                                                 "<span class=\"footnote-circle\"></span>" +
-                                        "</a></div>"
+                                        "</a></div>",
+                footnoteAnchorsMatch: /(fn|footnote|note)[:\-_\d]/gi,
+                closestFootnoteEl   : "li",
+                footnoteAnchorParent: "sup",
+                footnoteAnchorChild : "sup",
+                footnoteAnchorParentClass : "footnote"
             }, options);
 
         var popoverStates = {};
@@ -131,14 +136,14 @@
                 if(!relAttr || relAttr == "null") {
                     relAttr = "";
                 }
-                return ($this.attr("href") + relAttr).match(/(fn|footnote|note)[:\-_\d]/gi) && $this.closest("[class*=footnote]:not(a):not(sup)").length < 1;
+                return ($this.attr("href") + relAttr).match(settings.footnoteAnchorsMatch) && $this.closest("[class*="+ settings.footnoteAnchorParentClass +"]:not(a):not("+ settings.footnoteAnchorParent +")").length < 1;
             }); // End of footnote link .filter()
 
             var footnotes       = [],
                 footnoteLinks   = [],
                 finalFNLinks    = [],
                 relatedFN,
-                $closestFootnoteLi,
+                $closestFootnoteEl,
                 $actualFootnoteLi;
 
             // Resolve issues with superscript/ anchor combination
@@ -149,10 +154,10 @@
                 // escape symbols with special jQuery/ CSS selector meaning
                 relatedFN = $(this).attr("data-footnote-ref").replace(/[:.+~*\]\[]/g, "\\$&");
                 if(settings.useFootnoteOnlyOnce) relatedFN = relatedFN + ":not(.footnote-processed)";
-                $closestFootnoteLi = $(relatedFN).closest("li");
+                $closestFootnoteEl = $(relatedFN).closest(settings.closestFootnoteEl);
 
-                if($closestFootnoteLi.length > 0) {
-                    footnotes.push($closestFootnoteLi.first().addClass("footnote-processed"));
+                if($closestFootnoteEl.length > 0) {
+                    footnotes.push($closestFootnoteEl.first().addClass("footnote-processed"));
                     finalFNLinks.push(this);
                 }
             });
@@ -255,8 +260,8 @@
         // Array of top-level emenets with data attributes for combined ID/ HREF
 
         var cleanFootnoteLinks = function($footnoteAnchors, footnoteLinks) {
-            var $supParent,
-                $supChild,
+            var $elParent,
+                $elChild,
                 linkHREF,
                 linkID;
 
@@ -266,20 +271,20 @@
             $footnoteAnchors.each(function() {
                 var $this = $(this);
                 linkHREF = "#" + ($this.attr("href")).split("#")[1]; // just the fragment ID
-                $supParent = $this.closest("sup");
-                $supChild = $this.find("sup");
+                $elParent = $this.closest(settings.footnoteAnchorParent);
+                $elChild = $this.find(settings.footnoteAnchorChild);
 
-                if($supParent.length > 0) {
+                if($elParent.length > 0) {
                     // Assign the link ID to be the parent's and child's combined
-                    linkID = ($supParent.attr("id") || "") + ($this.attr("id") || "");
+                    linkID = ($elParent.attr("id") || "") + ($this.attr("id") || "");
                     footnoteLinks.push(
-                        $supParent.attr({
+                        $elParent.attr({
                             "data-footnote-backlink-ref": linkID,
                             "data-footnote-ref": linkHREF
                         })
                     );
-                } else if($supChild.length > 0) {
-                    linkID = ($supChild.attr("id") || "") + ($this.attr("id") || "");
+                } else if($elChild.length > 0) {
+                    linkID = ($elChild.attr("id") || "") + ($this.attr("id") || "");
                     footnoteLinks.push(
                         $this.attr({
                             "data-footnote-backlink-ref": linkID,
