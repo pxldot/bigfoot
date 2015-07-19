@@ -269,6 +269,7 @@
   width: $popover-tooltip-size;
   height: $popover-tooltip-size;
   transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 
   // BACKDROP
   background: $popover-tooltip-background;
