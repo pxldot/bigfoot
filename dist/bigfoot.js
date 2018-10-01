@@ -55,7 +55,7 @@
             return finalFNLinks.push(this);
           }
         });
-        $currentLastFootnoteLink = $("[data-footnote-identifier]:last");
+        $currentLastFootnoteLink = $("[data-footnote-identifier]").length;
         footnoteIDNum = $currentLastFootnoteLink.length < 1 ? 0 : +$currentLastFootnoteLink.data("footnote-identifier");
         _results = [];
         for (i = _i = 0, _ref = footnotes.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {

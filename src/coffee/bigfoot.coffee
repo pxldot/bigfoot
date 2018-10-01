@@ -324,9 +324,9 @@
           footnotes.push $closestFootnoteEl.first().addClass("footnote-processed")
           finalFNLinks.push this
 
-      # If there are already footnote links, look for the last one and set
+      # If there are already footnote links, count numbers exist and set
       # it as the beginning value for the next set of footnotes.
-      $currentLastFootnoteLink = $("[data-footnote-identifier]:last")
+      $currentLastFootnoteLink = $("[data-footnote-identifier]").length
       footnoteIDNum = if $currentLastFootnoteLink.length < 1 then 0 else +$currentLastFootnoteLink.data("footnote-identifier")
 
       # Initiates the button with the footnote content
