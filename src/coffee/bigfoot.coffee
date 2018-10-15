@@ -326,9 +326,7 @@
 
       # If there are already footnote links, count numbers exist and set
       # it as the beginning value for the next set of footnotes.
-      $currentLastFootnoteLink = $("[data-footnote-identifier]").length
-      footnoteIDNum = if $currentLastFootnoteLink.length < 1 then 0 else +$currentLastFootnoteLink.data("footnote-identifier")
-
+      footnoteIDNum = $("[data-footnote-identifier]").length
       # Initiates the button with the footnote content
       # Also performs the desired action on the original footnotes
       for i in [0...footnotes.length]

@@ -28,7 +28,7 @@
       settings = $.extend(defaults, options);
       popoverStates = {};
       footnoteInit = function() {
-        var $curResetElement, $currentLastFootnoteLink, $footnoteAnchors, $footnoteButton, $lastResetElement, $parent, $relevantFNLink, $relevantFootnote, finalFNLinks, footnoteButton, footnoteButtonSearchQuery, footnoteContent, footnoteIDNum, footnoteLinks, footnoteNum, footnotes, i, _i, _ref, _results;
+        var $curResetElement, $footnoteAnchors, $footnoteButton, $lastResetElement, $parent, $relevantFNLink, $relevantFootnote, finalFNLinks, footnoteButton, footnoteButtonSearchQuery, footnoteContent, footnoteIDNum, footnoteLinks, footnoteNum, footnotes, i, _i, _ref, _results;
         footnoteButtonSearchQuery = settings.scope ? "" + settings.scope + " a[href*='#']" : "a[href*='#']";
         $footnoteAnchors = $(footnoteButtonSearchQuery).filter(function() {
           var $this, relAttr;
@@ -55,8 +55,7 @@
             return finalFNLinks.push(this);
           }
         });
-        $currentLastFootnoteLink = $("[data-footnote-identifier]").length;
-        footnoteIDNum = $currentLastFootnoteLink.length < 1 ? 0 : +$currentLastFootnoteLink.data("footnote-identifier");
+        footnoteIDNum = $("[data-footnote-identifier]").length;
         _results = [];
         for (i = _i = 0, _ref = footnotes.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
           footnoteContent = removeBackLinks($(footnotes[i]).html().trim(), $(finalFNLinks[i]).data("footnote-backlink-ref"));
