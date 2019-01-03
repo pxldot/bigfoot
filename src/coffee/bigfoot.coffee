@@ -440,7 +440,7 @@
 
 
     #*
-    # Propogates the decision of deleting/ hiding the original footnotes up the hierarchy, eliminating any empty/ fully-hidden elements containing the footnotes and any horizontal rules used to denote the start of the footnote section.
+    # Propagates the decision of deleting/ hiding the original footnotes up the hierarchy, eliminating any empty/ fully-hidden elements containing the footnotes and any horizontal rules used to denote the start of the footnote section.
     #
     # @param {jQuery} $el - Container of the footnote that was deleted/ hidden.
     #
@@ -458,7 +458,7 @@
         $parent = $el.parent()
         if settings.actionOriginalFN.toLowerCase() == "delete" then $el.remove() else $el.addClass "footnote-print-only"
 
-        # Propogate up to the container element
+        # Propagate up to the container element
         deleteEmptyOrHR $parent
 
       else if $el.children(":not(.footnote-print-only)").length == $el.children("hr:not(.footnote-print-only)").length
@@ -470,7 +470,7 @@
           $el.children("hr").addClass "footnote-print-only"
           $el.addClass "footnote-print-only"
 
-        # Propogate up to the container element
+        # Propagate up to the container element
         deleteEmptyOrHR $parent
 
 
@@ -561,7 +561,7 @@
         return if $buttonHovered.hasClass("is-active")
         $buttonHovered.addClass "is-hover-instantiated"
 
-        # Delete other popovers, unless overriden in the settings
+        # Delete other popovers, unless overridden in the settings
         unless settings.allowMultipleFN
           otherPopoverSelector = ".bigfoot-footnote:not(#{dataIdentifier})"
           removePopovers otherPopoverSelector
